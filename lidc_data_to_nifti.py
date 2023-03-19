@@ -13,20 +13,20 @@ import numpy as np
 import lidcXmlHelper as xmlHelper
 
 # Path to the command lines tools of MITK Phenotyping
-path_to_executables=r"E:\Tools\MITK Phenotyping 2018-10-18\bin"
+path_to_executables=r"D:\yeyuxiang_workdir\software\MITK 2016.11.99_rcadabe\bin"
 # Path to the folder that contains the LIDC-IDRI DICOM files
-path_to_dicoms = r"P:\Goetz\Datenkollektive\Lungendaten\Nodules_LIDC_IDRI\DICOM"
+path_to_dicoms = r"D:\yeyuxiang_workdir\data\lidc_data\manifest-1600709154662\LIDC-IDRI"
 # Path to the folder that contains the LIDC-IDRI XML files
-path_to_xmls= r"P:\Goetz\Datenkollektive\Lungendaten\Nodules_LIDC_IDRI\XML\tcia-lidc-xml"
-path_to_xmls= r"P:\Goetz\Datenkollektive\Lungendaten\Nodules_LIDC_IDRI\XML2"
+path_to_xmls= r"D:\yeyuxiang_workdir\data\lidc_data\tcia-lidc-xml"
+
 # Output path where the generated NRRD and NIFTI files will be saved
-path_to_nrrds =  r"P:\Goetz\Datenkollektive\Lungendaten\Nodules_LIDC_IDRI\new_nrrd_2"
+path_to_nrrds =  r"D:\yeyuxiang_workdir\data\lidc_data\feature_engineering\new_nrrd_2"
 # Output path where the genreated Planar Figures will be saved
-path_to_planars= r"P:\Goetz\Datenkollektive\Lungendaten\Nodules_LIDC_IDRI\new_planars_2"
+path_to_planars= r"D:\yeyuxiang_workdir\data\lidc_data\feature_engineering\new_planars_2"
 # Output path to the CSV-file that will contain the nodule characteristics. An existing will be appended
-path_to_characteristics=r"P:\Goetz\Datenkollektive\Lungendaten\Nodules_LIDC_IDRI\characteristics_2.csv"
+path_to_characteristics=r"D:\yeyuxiang_workdir\data\lidc_data\feature_engineering\characteristics_2.csv"
 # Ouput path to an error file where errors will be logged. An existing file will be appended.
-path_to_error_file=r"W:\Old\LungImages\LIDC-IDRI\conversion_error_2.txt"
+path_to_error_file=r"D:\yeyuxiang_workdir\data\lidc_data\feature_engineering\conversion_error_2.txt"
 
 planar_template=r"template.pf"
 
@@ -361,8 +361,7 @@ def parse_xml_file(file):
 
 
 nodule_id = 0
-for xml_file in glob.glob(os.path.join(path_to_xmls,"*","*.xml")):
-    global path_to_characteristics
+for xml_file in sorted(glob.glob(os.path.join(path_to_xmls,"*","*.xml"))):
     os.makedirs(os.path.dirname(path_to_characteristics), exist_ok=True)
     with open(path_to_characteristics,"a") as file:
         file.write(";".join(["Patient_ID","Session_ID","Radiologist","Nodule_Str","subtlety","internalStructure","calcification","sphericity","margin","lobulation","spiculation","texture","malignancy"])+"\n") 
